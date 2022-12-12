@@ -12,3 +12,4 @@ app.get('/', (req, res) => {
     log(req.socket.remoteAddress, `Sent version information.`);
     res.status(200).send(`2/14.szft Backend API ${version}.`);
 });
+
