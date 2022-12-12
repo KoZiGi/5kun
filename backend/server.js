@@ -21,6 +21,6 @@ app.use('/views',express.static(path.join(__dirname, '/views')));
 app.use(express.urlencoded({ extended: true }));
 
 
-app.listen(config.appconfig.port, ()=>{
-    console.log(`Server is listening on port ${config.appconfig.port}...`);
-})
+
+app.use('/api/files', require('./controllers/files'));
+app.listen(process.env.PORT)
