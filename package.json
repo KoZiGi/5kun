@@ -1,0 +1,19 @@
+{
+  "name": "5kun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KoZiGi/5kun.git"
+  },
+  "author": "KoZiGi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KoZiGi/5kun/issues"
+  },
+  "homepage": "https://github.com/KoZiGi/5kun#readme"
+}
