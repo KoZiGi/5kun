@@ -9,9 +9,9 @@ app.factory('db', function($http, $q){
             });
             return deferrer.promise;
         },
-        insert: function(data){
+        insert: function(tablename,data){
             let deferrer = $q.defer();
-            $http.post('http://localhost:3000/api/', data).then(function(res){
+            $http.post(`http://localhost:3000/api/${tablename}`, data).then(function(res){
                 deferrer.resolve(res);
             }, function(res){
                 deferrer.reject(res);
