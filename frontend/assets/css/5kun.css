@@ -19,12 +19,13 @@ h1{font-size:2.25rem;}
 h2{font-size:1.75rem;}
 h3{font-size:1.5rem;}
 nav, footer{background-color:var(--secondary);}
-.border{border-color:var(--primary) !important;}
+#close{cursor:pointer;}
 #body{
     display: flex;
     flex-flow:column;
     min-height: 100vh;
 }
+.border{border-color:var(--primary) !important;}
 .border-dark{border-color:var(--bs-dark) !important;}
 .content{flex:1 1 auto;}
 .btn{background-color: var(--primary);}
