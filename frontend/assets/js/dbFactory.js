@@ -16,6 +16,7 @@ app.factory('db', function($http, $q){
             }, function(res){
                 deferrer.reject(res);
             })
+            return deferrer.promise;
         },
         selectAll: function(tablename){
             let deferrer = $q.defer();
@@ -24,6 +25,7 @@ app.factory('db', function($http, $q){
             },function(res){
                 deferrer.reject(res);
             })
+            return deferrer.promise;
         },
         select:function(tablename, field, value){
             let deferrer = $q.defer();
@@ -32,6 +34,7 @@ app.factory('db', function($http, $q){
             }, function(res){
                 deferrer.reject(res);
             })
+            return deferrer.promise;
         },
         update: function(tablename, id, data){
             let deferrer = $q.defer();
@@ -40,6 +43,16 @@ app.factory('db', function($http, $q){
             }, function(res){
                 deferrer.reject(res);
             })
+            return deferrer.promise;
+        },
+        delete: function(tablename, id){
+            let deferrer = $q.defer();
+            $http.delete(`http://localhost:3000/${tablename}/${id}`).then(function(res){
+                deferrer.resolve(res);
+            }, function(res){
+                deferrer.reject(res);
+            })
+            return deferrer.promise
         }
     }
 })
