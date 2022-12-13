@@ -5,7 +5,35 @@ app.run(function($rootScope){
         appTitle: '5kun',
         company: 'Bajai SZC Türr István Technikum',
         author: 'Team KoZiGi'
+    };
+    $rootScope.user = {};
+    if (window.localStorage.getItem('5kun')){
     }
+    else{
+        $rootScope.user.permission=0;
+    }
+    $rootScope.urls = [
+        {
+            link:'#!/',
+            name:'Login',
+            perm:0
+        },
+        {
+            link:'#!/reg',
+            name:'Registration',
+            perm:0
+        },
+        {
+            link:'#!/feed',
+            name:'Feed',
+            perm:0
+        },
+        {
+            link:'#!/profil/',
+            name:'My Profile',
+            perm:1
+        }
+    ]
 })
 
 app.config(function($routeProvider) {
