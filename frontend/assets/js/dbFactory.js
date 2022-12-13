@@ -2,20 +2,11 @@ app.factory('db', function($http, $q){
     return {
         login: function(data){
             let deferrer = $q.defer();
-            $http.post('http://localhost:3000/login', data).then(function(res){
+            $http.post('http://localhost:3000/log', data).then(function(res){
                 deferrer.resolve(res);
             }, function(res){
                 deferrer.reject(res);
             });
-            return deferrer.promise;
-        },
-        register: function(data){
-            let deferrer = $q.defer();
-            $http.post('http://localhost:3000/register', data).then(function(res){
-                deferrer.resolve(res);
-            }, function(res){
-                deferrer.reject(res);
-            })
             return deferrer.promise;
         },
         selectAll: function(tablename){
