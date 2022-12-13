@@ -1,0 +1,7 @@
+<main>
+    <div class="mb-3 mx-auto col-md-8 col-11" ng-if="user.ID!=undefined">
+        <textarea class="form-control mb-1" ng-model="newpost.message" placeholder="What's going on?"></textarea>
+        <button class="btn" ng-click="Post()"><i class="bi bi-send"></i></button>
+    </div>
+    <div class="posts"></div>
+</main>

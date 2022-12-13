@@ -7,45 +7,49 @@ app.run(function($rootScope){
         author: 'Team KoZiGi'
     };
     $rootScope.user = {};
-    if (window.localStorage.getItem('5kun')){
-    }
-    else{
-        $rootScope.user.permission=0;
-    }
+    if (window.localStorage.getItem('5kun')){$rootScope.user = angular.fromJson(window.localStorage.getItem('5kun'));}
+    $rootScope.LogOut = function(){
+        $rootScope.user = {};
+        window.localStorage.setItem('5kun', '{}');
+    };
     $rootScope.urls = [
         {
             link:'#!/',
             name:'Login',
-            perm:0
+            perm: Object.values($rootScope.user).length==0
         },
         {
             link:'#!/reg',
             name:'Registration',
-            perm:0
+            perm: Object.values($rootScope.user).length==0
         },
         {
             link:'#!/feed',
             name:'Feed',
-            perm:0
-        },
-        {
-            link:'#!/profil/',
-            name:'My Profile',
-            perm:1
+            perm: Object.values($rootScope.user).length>=0
         }
     ]
 })
 
 app.config(function($routeProvider) {
     $routeProvider
-    // bárki számára
         .when("/",{
             templateUrl: 'views/login.html',
-            controller: 'loginCtrl'
+            controller: 'loginCtrl',
+            // bejelentkezett felhasználó ne tudjon ide menni!
+            resolve: {
+                function($rootScope, $location){
+                    if (Object.values($rootScope.user).length>0) $location.path('/feed');
+                }
+            }
         })
         .when("/reg",{
             templateUrl: 'views/reg.html',
-            controller: 'regCtrl'
+            controller: 'regCtrl',
+            // bejelentkezett felhasználó ne tudjon ide menni!
+            resolve: {function($rootScope, $location){
+                if (Object.values($rootScope.user).length>0) $location.path('/feed');
+            }}
         })
         .when('/feed', {
             templateUrl: 'views/feed.html',
@@ -57,7 +61,12 @@ app.config(function($routeProvider) {
         })
         .when("/profilmod",{
             templateUrl: 'views/profilmod.html',
-            controller: 'profilmodCtrl'
+            controller: 'profilmodCtrl',
+            resolve: {
+                function ($rootScope, $location){
+                    if (Object.values($rootScope.user).length==0) $location.path('/')
+                }
+            }
         })
         .when("/messages",{
             templateUrl: 'views/messages.html',

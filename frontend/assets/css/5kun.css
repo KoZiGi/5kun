@@ -28,6 +28,10 @@ nav, footer{background-color:var(--secondary);}
 .border{border-color:var(--primary) !important;}
 .border-dark{border-color:var(--bs-dark) !important;}
 .content{flex:1 1 auto;}
+.dropdown-menu{background-color:var(--secondary); border-color:var(--bs-dark);}
+.dropdown-divider{border-color:var(--bs-dark);}
+.dropdown-item{transition: background-color 0.2s;}
+.dropdown-item:hover{background-color:var(--link);}
 .btn{background-color: var(--primary);}
 .btn:hover{background-color: var(--secondary);}
 .btn:active{background-color: var(--link) !important; border-color: transparent !important;}

@@ -1,4 +1,4 @@
-app.controller('loginCtrl', function($scope, db){
+app.controller('loginCtrl', function($rootScope, $scope, db){
     $scope.loguser = {};
     $scope.error = {};
     $scope.ShutUp = function(){$scope.error = false;}
@@ -15,7 +15,12 @@ app.controller('loginCtrl', function($scope, db){
              email:$scope.loguser.email,
              passwd:$scope.loguser.passwd
             }).then(function(res){
-                console.log(res.data);
+                $rootScope.user = {
+                    ID: res.data.ID,
+                    name: res.data.name,
+                    email: res.data.email
+                };
+                window.localStorage.setItem('5kun', angular.toJson($rootScope.user));
             }, function(res){
                 $scope.error.type = res.data.type;
                 $scope.error.message = res.data.message;
