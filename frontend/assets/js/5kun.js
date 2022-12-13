@@ -9,12 +9,33 @@ app.run(function($rootScope){
 app.config(function($routeProvider) {
     $routeProvider
     // bárki számára
-        .when('/', {
+        .when("/",{
+            templateUrl: 'views/login.html',
+            controller: 'loginCtrl'
+        })
+        .when("/reg",{
+            templateUrl: 'views/reg.html',
+            controller: 'regCtrl'
+        })
+        .when('/feed', {
             templateUrl: 'views/feed.html',
             controller: 'feedCtrl'
         })
-        .when('/',{
-
+        .when("/profil/:id",{
+            templateUrl: 'views/profil.html',
+            controller: 'profilCtrl'
+        })
+        .when("/profilmod",{
+            templateUrl: 'views/profilmod.html',
+            controller: 'profilmodCtrl'
+        })
+        .when("/messages",{
+            templateUrl: 'views/messages.html',
+            controller: 'messagesCtrl'
+        })
+        .when("/admin",{
+            templateUrl: 'views/admin.html',
+            controller: 'adminCtrl'
         })
         .otherwise('/')
 });
