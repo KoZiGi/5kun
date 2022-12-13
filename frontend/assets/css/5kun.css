@@ -1,0 +1,27 @@
+
+:root{
+    --primary: #cb997e;
+    --secondary: #ddbea9;
+    --link: #ffe8d6;
+    --green1:#b7b7a4;
+    --green2: #a5a58d;
+    --green3: #6b705c;
+}
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../fonts/DMSans-Regular.ttf');
+}
+body{
+    font-family:'DM Sans';
+}
+nav, footer{
+    background-color:var(--secondary);
+}
+#body{
+    display: flex;
+    flex-flow:column;
+    min-height: 100vh;
+}
+.content{
+    flex:1 1 auto;
+}

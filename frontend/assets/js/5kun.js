@@ -1,9 +1,11 @@
-let app = new angular.module('pizzeriaApp', ['ngRoute']);
+let app = new angular.module('kunkun', ['ngRoute']);
 
 app.run(function($rootScope){
-    $rootScope.settings.appTitle = '5KUN';
-    $rootScope.settings.company = 'Bajai SZC Türr István Technikum';
-    $rootScope.settings.author = 'Team KoZiGi';
+    $rootScope.settings = {
+        appTitle: '5kun',
+        company: 'Bajai SZC Türr István Technikum',
+        author: 'Team KoZiGi'
+    }
 })
 
 app.config(function($routeProvider) {
