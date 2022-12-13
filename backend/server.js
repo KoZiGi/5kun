@@ -8,6 +8,8 @@ const multer = require('multer');
 const app = express();
 const version = process.env.VERSION;
 const config = require('./config.js');
+const debug=process.env.DEBUG;
+
 
 app.get('/', (req, res) => {
     log(req.socket.remoteAddress, `Sent version information.`);
@@ -15,15 +17,10 @@ app.get('/', (req, res) => {
 });
 
 function log(req, res) {
-
     if (debug == 1) {
-
         var timestamp = moment(new Date()).format('yyyy-MM-DD HH:mm:ss');
-
         console.log(`[${timestamp}] : ${req} >>> ${res}`);
-
     }
-
 }
 
 //Middlewares
