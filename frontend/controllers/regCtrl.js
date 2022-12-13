@@ -1,9 +1,10 @@
 app.controller('regCtrl', function($scope,$rootScope,db) {
     $scope.newuser={}
-    $scope.error = {};
+    $scope.error = {}
+    $scope.pw2=""
     $scope.ShutUp = function(){$scope.error = false;}
     $scope.Register= function(){
-        if($scope.newuser.name==""|| $scope.newuser.email==""||$scope.newuser.password==""||$scope.newuser.pw2==""){
+        if($scope.newuser.name==""|| $scope.newuser.email==""||$scope.newuser.password==""||$scope.pw2==""){
             $scope.error = {
                 show: true,
                 type: 'danger',
@@ -11,7 +12,7 @@ app.controller('regCtrl', function($scope,$rootScope,db) {
             }
         }
         else{
-            if($scope.newuser.password!=$scope.newuser.pw2){
+            if($scope.newuser.password!=$scope.pw2){
                 $scope.error = {
                     show: true,
                     type: 'danger',
@@ -19,41 +20,36 @@ app.controller('regCtrl', function($scope,$rootScope,db) {
                 }
             }
             else{
-                if(!$scope.newuser.password.matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])$")){
+                if($scope.newuser.password.match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/")){
                     $scope.error = {
                         show: true,
                         type: 'danger',
-                        message: 'The password has to contain at least one lowercase, one uppercase character, and a number!'
+                        message: 'The password is not strong enough!'
                     }
                 }
                 else{
-                    if($scope.newuser.password.length<8){
-                        $scope.error = {
-                            show: true,
-                            type: 'danger',
-                            message: 'The password has to be at least eight characters long!'
+                    db.selectAll("users").then(function(results){
+                        let van=false;
+                        results.data.forEach(element => {
+                            if(element.email==$scope.newuser.email)van=true
+                        });
+                        if(van){
+                            $scope.error = {
+                                show: true,
+                                type: 'danger',
+                                message: 'This Email is already taken!'
+                            }
                         }
-                    }
-                    else{
-                        db.select("user","email",$scope.newuser.email).then(function(results){
-                            if(results.length!=0){
+                        else{
+                            db.insert("users",$scope.newuser).then(function(){
                                 $scope.error = {
                                     show: true,
-                                    type: 'danger',
-                                    message: 'This Email is already taken!'
+                                    type: 'success',
+                                    message: 'Registration successfull!'
                                 }
-                            }
-                            else{
-                                db.insert("users",$scope.newuser).then(function(){
-                                    $scope.error = {
-                                        show: true,
-                                        type: 'success',
-                                        message: 'Registration successfull!'
-                                    }
-                                })
-                            }
-                        })
-                    }
+                            })
+                        }
+                    })
                 }
             }
         }
