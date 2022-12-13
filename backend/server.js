@@ -6,9 +6,9 @@ const path = require('path');
 const cors = require('cors');
 const app = express();
 const version = process.env.VERSION;
-const config = require('./config.js');
 const debug=process.env.DEBUG;
-
+const multer = require('multer');
+const upload = require('./controllers/files').upload;
 
 app.get('/', (req, res) => {
     log(req.socket.remoteAddress, `Sent version information.`);

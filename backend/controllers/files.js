@@ -2,9 +2,7 @@ let fs = require('fs');
 let multer = require('multer');
 let path = require('path');
 let storage = multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null, path.join(__dirname, '../frontend/uploads/'));
-    },
+    destination:path.join(__dirname, '../../frontend/assets/uploads/'),
     filename:(req,file,cb)=>{
         let filename = Date.now()+'-'+file.originalname+path.extname(file.originalname);
         cb(filename);

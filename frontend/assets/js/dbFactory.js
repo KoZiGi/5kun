@@ -2,7 +2,16 @@ app.factory('db', function($http, $q){
     return {
         login: function(data){
             let deferrer = $q.defer();
-            $http.post('http://localhost:3000/log', data).then(function(res){
+            $http.post('http://localhost:3000/api/log', data).then(function(res){
+                deferrer.resolve(res);
+            }, function(res){
+                deferrer.reject(res);
+            });
+            return deferrer.promise;
+        },
+        insert: function(data){
+            let deferrer = $q.defer();
+            $http.post('http://localhost:3000/api/', data).then(function(res){
                 deferrer.resolve(res);
             }, function(res){
                 deferrer.reject(res);
@@ -11,7 +20,7 @@ app.factory('db', function($http, $q){
         },
         selectAll: function(tablename){
             let deferrer = $q.defer();
-            $http.get(`http://localhost:3000/${tablename}`).then(function(res){
+            $http.get(`http://localhost:3000/api/${tablename}`).then(function(res){
                 deferrer.resolve(res);
             },function(res){
                 deferrer.reject(res);
@@ -20,7 +29,7 @@ app.factory('db', function($http, $q){
         },
         select:function(tablename, field, value){
             let deferrer = $q.defer();
-            $http.get(`http://localhost:3000/${tablename}/${field}/${value}`).then(function(res){
+            $http.get(`http://localhost:3000/api/${tablename}/${field}/${value}`).then(function(res){
                 deferrer.resolve(res);
             }, function(res){
                 deferrer.reject(res);
@@ -29,7 +38,7 @@ app.factory('db', function($http, $q){
         },
         update: function(tablename, id, data){
             let deferrer = $q.defer();
-            $http.patch(`http://localhost:3000/${tablename}/${id}`, data).then(function(res){
+            $http.patch(`http://localhost:3000/api/${tablename}/${id}`, data).then(function(res){
                 deferrer.resolve(res);
             }, function(res){
                 deferrer.reject(res);
@@ -38,7 +47,7 @@ app.factory('db', function($http, $q){
         },
         delete: function(tablename, id){
             let deferrer = $q.defer();
-            $http.delete(`http://localhost:3000/${tablename}/${id}`).then(function(res){
+            $http.delete(`http://localhost:3000/api/${tablename}/${id}`).then(function(res){
                 deferrer.resolve(res);
             }, function(res){
                 deferrer.reject(res);

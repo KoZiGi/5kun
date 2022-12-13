@@ -2,13 +2,14 @@
 
     <form class="col-lg-6 col-md-8 col-sm-10 offset-lg-3 offset-md-2 offset-sm-1 border p-3 border rounded border-2">
         <h3 class="mb-3 mt-1">Log in</h3>
+        <div ng-if="error.show" class="alert alert-{{error.type}}">{{error.message}}</div>
         <div class="mb-3">
             <label for="email" class="form-label">E-Mail:</label>
             <input type="email" class="form-control" ng-model="loguser.email">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password:</label>
-            <input type="password" class="form-control" ng-model="loguser.password">
+            <input type="password" class="form-control" ng-model="loguser.passwd">
         </div>
         <input type="button" class="btn me-2" ng-click="LogIn()" value="Log in"><a href="#!/reg" class="btn">Register</a>
     </form>
