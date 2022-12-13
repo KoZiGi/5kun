@@ -22,4 +22,4 @@ Router.delete('/:filename', (req,res)=>{
         else res.status(200).send("Successfull deletion!");
     });
 })
-module.exports = Router;
+module.exports = {Router, upload};

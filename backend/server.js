@@ -4,7 +4,6 @@ var mysql = require('mysql');
 const moment = require('moment');
 const path = require('path');
 const cors = require('cors');
-const multer = require('multer');
 const app = express();
 const version = process.env.VERSION;
 const config = require('./config.js');
@@ -28,12 +27,12 @@ app.use('/assets',express.static(path.join(__dirname, '/assets')));
 app.use('/views',express.static(path.join(__dirname, '/views')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 //CONTROLLERS
 const userController=require('./controllers/userController.js');
 app.use('/api', userController);
-
-app.use('/api/files', require('./controllers/files'));
+app.use('/api/files', require('./controllers/files').Router);
 
 
 app.listen(process.env.PORT)
