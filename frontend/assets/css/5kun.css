@@ -1,4 +1,6 @@
-
+.star{
+    color:red;
+}
 :root{
     --primary: #cb997e;
     --secondary: #ddbea9;
