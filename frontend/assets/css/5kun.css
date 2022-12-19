@@ -25,6 +25,10 @@ nav, footer{background-color:var(--secondary);}
     flex-flow:column;
     min-height: 100vh;
 }
+.post-header{max-height: 50px;}
+.post-header>img{
+    height: 50px;
+}
 .border{border-color:var(--primary) !important;}
 .border-dark{border-color:var(--bs-dark) !important;}
 .content{flex:1 1 auto;}
