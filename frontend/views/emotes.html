@@ -1,5 +1,5 @@
 <div id="emote-picker" class="d-none" ng-controller="emoteCtrl">
     <ul class=" d-flex flex-row justify-content-around" ng-for="icon in icons">
-        <li class="{{icon.emoticon}}" title="{{icon.name}}"></li>
+        <li class="bi {{icon.emoticon}}" title="{{icon.name}}" ng-click="sendemote"></li>
     </ul>
 </div>
