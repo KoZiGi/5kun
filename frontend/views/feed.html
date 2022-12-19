@@ -1,16 +1,21 @@
 <main>
     <div ng-if="message.show" class="alert alert-{{message.type}} col-md-8 col-11 mx-auto mb-3"><i class="bi bi-{{message.icon}}"></i> {{message.text}}</div>
     <div class="mb-3 mx-auto col-md-8 col-11" ng-if="user.ID!=undefined">
-        <textarea class="form-control mb-1" ng-model="newpost.postmessage" placeholder="What's going on?"></textarea>
-        <button class="btn" ng-click="Post()"><i class="bi bi-send"></i></button>
+        <h2 class="mt-3">What's going on?</h2>
+        <textarea class="form-control mb-1" ng-model="newpost.postmessage"></textarea>
+        <button class="btn col-md-1 col-3 offset-md-11 offset-9" ng-click="Post()"><i class="bi bi-send"></i></button>
+        <hr>
     </div>
     <div class="posts col-md-8 col-11 mx-auto mb-3">
         <div class="post" ng-repeat="post in posts">
-            <div class="d-flex post-header">
-                <img src="./assets/images/nopic.png" ng-if="post.filename==null" class="img img-fluid" alt="">
-                <h3 class="mb-0">{{post.name}}</h3>
+            <div class="d-flex post-header mb-3">
+                <img src="./assets/images/nopic.png" ng-if="post.filename==null" class="img img-fluid me-3" alt="">
+                <img src="./assets/uploads/{{post.filename}}" ng-if="post.filename!=null" alt="">
+                <div>
+                    <h3 class="mb-0">{{post.name}}</h3>
+                    <h5 class="text-muted">{{post.date}}</h5>
+                </div>
             </div>
-            <h5 class="text-muted">{{post.date}}</h5>
             <div class="content">
                 <p>{{post.postmessage}}</p>
             </div>
