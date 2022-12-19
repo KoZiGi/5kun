@@ -20,7 +20,7 @@ h1{font-size:2.25rem;}
 h2{font-size:1.75rem;}
 h3{font-size:1.5rem;}
 nav, footer{background-color:var(--secondary);}
-#close{cursor:pointer;}
+#close, #close2{cursor:pointer;}
 #body{
     display: flex;
     flex-flow:column;

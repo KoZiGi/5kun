@@ -36,9 +36,9 @@ app.factory('db', function($http, $q){
             })
             return deferrer.promise;
         },
-        update: function(tablename, id, data){
+        update: function(tablename, field, value, data){
             let deferrer = $q.defer();
-            $http.patch(`http://localhost:3000/api/${tablename}/${id}`, data).then(function(res){
+            $http.patch(`http://localhost:3000/api/${tablename}/${field}/${value}`, data).then(function(res){
                 deferrer.resolve(res);
             }, function(res){
                 deferrer.reject(res);

@@ -1,0 +1,13 @@
+<main>
+    <div class="profileheader">
+        <img ng-if="profile.filename==null" src="./assets/images/nopic.png" alt="">
+        <h2 class="mb-0">{{profile.name}}</h2>
+        <h5 class="text-muted">{{profile.email}}</h5>
+    </div>
+    <div class="posts">
+        <div class="post" ng-repeat="post in posts">
+            <div>{{post.date}}</div>
+            <div>{{post.postmessage}}</div>
+        </div>
+    </div>
+</main>
