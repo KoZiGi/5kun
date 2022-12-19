@@ -36,7 +36,31 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
         $scope.message.type = type;
         $scope.message.show = true;
     }
+
+    $scope.icons=[]
+    db.selectAll("emotions").then(function(res){
+        $scope.icons=res.data
+    })
+
+    $scope.sendemote= function(postid,emojiid){
+        let reagaltmar=false
+        db.select('reactions','postID',postid).then(function(res){
+            res.data.forEach(element => {
+                if(element.userID==$rootScope.user.ID){
+                    reagaltmar=true
+                    alert("Erre a postra már reagáltál")
+                }
+            });
+        })
+        if(!reagaltmar){
+            let data={
+                'postID':postid,
+                'userID':$rootScope.user.ID,
+                'emojiID':emojiid
+            }
+            db.insert('reactions',data)
+        }
+    }
+    
+    
 })
-
-
-

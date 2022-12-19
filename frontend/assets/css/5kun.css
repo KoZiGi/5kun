@@ -38,3 +38,4 @@ nav, footer{background-color:var(--secondary);}
 .btn{background-color: var(--primary);}
 .btn:hover{background-color: var(--secondary);}
 .btn:active{background-color: var(--link) !important; border-color: transparent !important;}
+
