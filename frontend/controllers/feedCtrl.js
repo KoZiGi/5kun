@@ -11,7 +11,6 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
         $scope.posts = res.data;
         console.log($scope.posts);
     })
-
     $scope.Post = function(){
         let data = {
             userID: $rootScope.user.ID,
@@ -21,6 +20,9 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
             if (res.status==200){
                 if (res.data.insertId){
                     $scope.setMessage('success', 'check-lg', 'Successful post!')
+                    db.selectAll('postView').then(function(res){
+                        $scope.posts = res.data;
+                    })
                 }
             }
             else{
