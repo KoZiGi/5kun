@@ -24,7 +24,7 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto ">
-                  <li class="nav-item" ng-repeat="url in urls" ng-if="url.perm">
+                  <li class="nav-item" ng-repeat="url in urls" ng-hide="!url.perm">
                     <a class="nav-link" aria-current="page" href="{{url.link}}">{{url.name}}</a>
                   </li>
                   </ul>
@@ -44,7 +44,7 @@
               </div>
             </div>
         </nav>
-        <div class="content d-flex flex-column justify-content-center" ng-view></div>
+        <div ng-class='{"justify-content-center": window.location.href.split("!/")[1].split("/")[0]}' class="content d-flex flex-column" ng-view></div>
         <footer class="text-center">
             <p class="my-0">Made by {{settings.author}} <small>&copy;</small>2022.</p>
         </footer>
@@ -63,7 +63,6 @@
     <script src="./controllers/feedCtrl.js"></script>
     <script src="./controllers/regCtrl.js"></script>
     <script src="./controllers/profilCtrl.js"></script>
-    <script src="./controllers/emoteCtrl.js"></script>
     <script src="./controllers/regCtrl.js"></script>
     <script src="./assets/js/dbFactory.js"></script>
 </body>

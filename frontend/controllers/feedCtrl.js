@@ -10,6 +10,7 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
     db.selectAll('postView').then(function(res){
         $scope.posts = res.data;
         console.log($scope.posts);
+        $scope.posts.sort((a, b)=>b.ID-a.ID)
     })
     $scope.Post = function(){
         let data = {

@@ -45,6 +45,15 @@ app.factory('db', function($http, $q){
             })
             return deferrer.promise;
         },
+        deleteFile: function(filename){
+            let deferrer = $q.defer();
+            $http.delete(`http://localhost:3000/file/${filename}`).then(function(res){
+                deferrer.resolve(res);
+            }, function(res){
+                deferrer.reject(res);
+            })
+            return deferrer.promise
+        },
         delete: function(tablename, id){
             let deferrer = $q.defer();
             $http.delete(`http://localhost:3000/api/${tablename}/${id}`).then(function(res){

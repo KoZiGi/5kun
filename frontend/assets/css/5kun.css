@@ -26,6 +26,12 @@ nav, footer{background-color:var(--secondary);}
     flex-flow:column;
     min-height: 100vh;
 }
+#profile{
+    height: 100%;
+}
+#HeadAction>.btn{
+    border-radius: 0 !important;
+}
 .post-header{max-height: 50px;}
 .post-header>img{height: 50px;}
 .border{border-color:var(--primary) !important;}
@@ -38,4 +44,5 @@ nav, footer{background-color:var(--secondary);}
 .btn{background-color: var(--primary);}
 .btn:hover{background-color: var(--secondary);}
 .btn:active{background-color: var(--link) !important; border-color: transparent !important;}
-
+.profilepic{width: 50px; height: 50px;}
+.profilepic2{width: 100px;height: 100px;}

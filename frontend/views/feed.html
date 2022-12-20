@@ -6,14 +6,14 @@
         <button class="btn col-md-1 col-3 offset-md-11 offset-9" ng-click="Post()"><i class="bi bi-send"></i></button>
         <hr>
     </div>
-    <div class="posts col-md-8 col-11 mx-auto mb-3">
+    <div class="posts col-md-8 col-11 mx-auto my-3">
         <div class="post" ng-repeat="post in posts">
             <div class="d-flex post-header mb-3">
-                <img src="./assets/images/nopic.png" ng-if="post.filename==null" class="img img-fluid me-3" alt="">
-                <img src="./assets/uploads/{{post.filename}}" ng-if="post.filename!=null" alt="">
+                <img src="./assets/images/nopic.png" ng-if="post.filename==null" class="img img-fluid me-3 border border-dark border-3 rounded-circle profilepic" alt="">
+                <img src="./assets/uploads/{{post.filename}}" ng-if="post.filename!=null" class="img img-fluid me-3 border border-dark border-3 rounded-circle profilepic" alt="">
                 <div>
                     <h3 class="mb-0"><a href="#!/profil/{{post.userID}}" class="link-dark">{{post.name}}</a></h3>
-                    <h5 class="text-muted">{{post.date}}</h5>
+                    <h5 class="text-muted">{{post.date.split('T')[0].replaceAll('-','.')}} {{post.date.split('T')[1].split('.')[0]}}</h5>
                 </div>
             </div>
             <div class="content">
