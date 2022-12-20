@@ -19,7 +19,6 @@
             <div class="content">
                 <p>{{post.postmessage}}</p>
             </div>
-            <button type="button" ng-click="emoteup" class="btn mb-3">Emote</button>
             <div class="emote-picker">
                 <ul class=" d-flex flex-wrap">
                     <li ng-repeat="icon in icons" class="m-1 mb-3"><i class="bi {{icon.emoticon}}" title="{{icon.name}}" ng-click="sendemote(post.ID,icon.ID)"></i></li>
