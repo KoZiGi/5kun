@@ -50,16 +50,17 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
                     reagaltmar=true
                     alert("Erre a postra már reagáltál")
                 }
-            });
+            })
+            if(!reagaltmar){
+                let data={
+                    'postID':postid,
+                    'userID':$rootScope.user.ID,
+                    'emojiID':emojiid
+                }
+                db.insert('reactions',data).then(alert('sikeres like'))
+            }    
         })
-        if(!reagaltmar){
-            let data={
-                'postID':postid,
-                'userID':$rootScope.user.ID,
-                'emojiID':emojiid
-            }
-            db.insert('reactions',data)
-        }
+        
     }
     
     
