@@ -1,0 +1,74 @@
+.bi-hand-thumbs-up{
+    background-color: blue;
+    padding: 10px;
+    border-radius: 100%;
+}
+.bi-hand-thumbs-down{
+    background-color: blue;
+    padding: 10px;
+    border-radius: 100%;
+}.bi-heart{
+    background-color: red;
+    padding: 10px;
+    border-radius: 100%;
+}.bi-heartbreak{
+    background-color: red;
+    padding: 10px;
+    border-radius: 100%;
+}.bi-emoji-kiss{
+    background-color: hotpink;
+    padding: 10px;
+    border-radius: 100%;
+}.bi-emoji-heart-eyes{
+    background-color: hotpink;
+    padding: 10px;
+    border-radius: 100%;
+}.bi-emoji-angry{
+    background-color: darkred;
+    padding: 10px;
+    border-radius: 100%;
+}.bi-emoji-frown{
+    background-color: gray;
+    padding: 10px;
+    border-radius: 100%;
+}.bi-emoji-laughing{
+    background-color: yellow;
+    padding: 10px;
+    color: black;
+    border-radius: 100%;
+}.bi-emoji-smile{
+    background-color: greenyellow;
+    padding: 10px;
+    color: black;
+
+    border-radius: 100%;
+}.bi-emoji-sunglasses{
+    background-color: black;
+    padding: 10px;
+    border-radius: 100%;
+}.bi-emoji-wink{
+    background-color: hotpink;
+    padding: 10px;
+    border-radius: 100%;
+}.bi-emoji-neutral{
+    background-color: wheat;
+    padding: 10px;
+    color: black;
+    border-radius: 100%;
+}
+.emote-picker{
+    background-color: var(--secondary);
+    border-radius:15px;
+    width: 60%;
+}
+
+ul{
+    padding: 10px;
+}
+
+li{
+    text-decoration: none;
+    list-style: none;
+    color:white;
+    cursor: pointer;
+}

@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: localhost
--- Létrehozás ideje: 2022. Dec 12. 10:20
--- Kiszolgáló verziója: 10.4.22-MariaDB
--- PHP verzió: 8.1.2
+-- Gép: 127.0.0.1
+-- Létrehozás ideje: 2022. Dec 19. 09:40
+-- Kiszolgáló verziója: 10.4.6-MariaDB
+-- PHP verzió: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -54,19 +55,19 @@ CREATE TABLE `emotions` (
 --
 
 INSERT INTO `emotions` (`ID`, `emoticon`, `name`) VALUES
-(1, '<i class=\"bi bi-hand-thumbs-up\"></i>', 'Kedvel'),
-(2, '<i class=\"bi bi-hand-thumbs-down\"></i>', 'Nem kedvel'),
-(3, '<i class=\"bi bi-heart\"></i>', 'Szeret'),
-(4, '<i class=\"bi bi-heartbreak\"></i>', 'Nem szeret'),
-(5, '<i class=\"bi bi-emoji-kiss\"></i>', 'Csókol'),
-(6, '<i class=\"bi bi-emoji-heart-eyes\"></i>', 'Örül'),
-(7, '<i class=\"bi bi-emoji-angry\"></i>', 'Mérges'),
-(8, '<i class=\"bi bi-emoji-frown\"></i>', 'Szomorú'),
-(9, '<i class=\"bi bi-emoji-laughing\"></i>', 'Nevet'),
-(10, '<i class=\"bi bi-emoji-smile\"></i>', 'Mosolyog'),
-(11, '<i class=\"bi bi-emoji-sunglasses\"></i>', 'Vagány'),
-(12, '<i class=\"bi bi-emoji-wink\"></i>', 'Kacsint'),
-(13, '<i class=\"bi bi-emoji-neutral\"></i>', 'Semleges');
+(1, 'bi-hand-thumbs-up', 'Kedvel'),
+(2, 'bi-hand-thumbs-down', 'Nem kedvel'),
+(3, 'bi-heart', 'Szeret'),
+(4, 'bi-heartbreak', 'Nem szeret'),
+(5, 'bi-emoji-kiss', 'Csókol'),
+(6, 'bi-emoji-heart-eyes', 'Örül'),
+(7, 'bi-emoji-angry', 'Mérges'),
+(8, 'bi-emoji-frown', 'Szomorú'),
+(9, 'bi-emoji-laughing', 'Nevet'),
+(10, 'bi-emoji-smile', 'Mosolyog'),
+(11, 'bi-emoji-sunglasses', 'Vagány'),
+(12, 'bi-emoji-wink', 'Kacsint'),
+(13, 'bi-emoji-neutral', 'Semleges');
 
 -- --------------------------------------------------------
 
@@ -107,6 +108,34 @@ CREATE TABLE `posts` (
   `postmessage` text COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
+--
+-- A tábla adatainak kiíratása `posts`
+--
+
+INSERT INTO `posts` (`ID`, `userID`, `date`, `postmessage`) VALUES
+(1, 1, '2022-12-19 09:09:09', 'adsf'),
+(2, 1, '2022-12-19 09:09:37', 'Ez egy poszt'),
+(3, 1, '2022-12-19 09:15:52', 'Postz'),
+(4, 1, '2022-12-19 09:16:16', 'poszts'),
+(5, 1, '2022-12-19 09:16:27', 'asdfsadfasdf'),
+(6, 1, '2022-12-19 09:17:01', 'asdfjélasdfjélsda');
+
+-- --------------------------------------------------------
+
+--
+-- A nézet helyettes szerkezete `postview`
+-- (Lásd alább az aktuális nézetet)
+--
+CREATE TABLE `postview` (
+`userID` int(11)
+,`date` datetime
+,`ID` int(11)
+,`postmessage` text
+,`name` varchar(100)
+,`email` varchar(255)
+,`filename` varchar(255)
+);
+
 -- --------------------------------------------------------
 
 --
@@ -138,6 +167,22 @@ CREATE TABLE `users` (
   `last` datetime DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `users`
+--
+
+INSERT INTO `users` (`ID`, `name`, `email`, `password`, `phone`, `address`, `filename`, `reg`, `last`, `status`) VALUES
+(1, 'Admin', 'admin@5kun.net', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', '+36301234567', 'Admin utca 52.', NULL, '2022-12-13 11:50:45', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Nézet szerkezete `postview`
+--
+DROP TABLE IF EXISTS `postview`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `postview`  AS  select `posts`.`userID` AS `userID`,`posts`.`date` AS `date`,`posts`.`ID` AS `ID`,`posts`.`postmessage` AS `postmessage`,`users`.`name` AS `name`,`users`.`email` AS `email`,`users`.`filename` AS `filename` from (`posts` join `users` on(`users`.`ID` = `posts`.`userID`)) ;
 
 --
 -- Indexek a kiírt táblákhoz
@@ -226,7 +271,7 @@ ALTER TABLE `pictures`
 -- AUTO_INCREMENT a táblához `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `reactions`
@@ -238,7 +283,7 @@ ALTER TABLE `reactions`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -275,8 +320,8 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `reactions`
   ADD CONSTRAINT `reactions_ibfk_1` FOREIGN KEY (`emojiID`) REFERENCES `emotions` (`ID`),
-  ADD CONSTRAINT `reactions_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `users` (`ID`),
-  ADD CONSTRAINT `reactions_ibfk_3` FOREIGN KEY (`postID`) REFERENCES `posts` (`ID`);
+  ADD CONSTRAINT `reactions_ibfk_3` FOREIGN KEY (`postID`) REFERENCES `posts` (`ID`),
+  ADD CONSTRAINT `reactions_ibfk_4` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

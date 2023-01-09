@@ -8,7 +8,7 @@ const moment=require('moment');
 const { route } = require('express/lib/application');
 
 //login 
-router.get('/log', (req,res)=>{
+router.post('/log', (req,res)=>{
     let user={
         'email': req.body.email,
         'passwd': req.body.passwd
@@ -16,8 +16,11 @@ router.get('/log', (req,res)=>{
     pool.query('SELECT * FROM `users` WHERE `email`=? AND `password`=?', [user.email, sha1(user.passwd)], (err,result)=>{
         if(err) res.status(500).send(err);
         else{
-            if(result.length>0) res.status(200).send(result);
-            else res.status(500).send(result);
+            if(result.length>0) res.status(200).send(result[0]);
+            else res.status(401).send({
+                message:'No such login!',
+                type:'danger'
+            });
         }
     })
 })
