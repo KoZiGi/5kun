@@ -9,8 +9,14 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
     $scope.posts = [];
     db.selectAll('postView').then(function(res){
         $scope.posts = res.data;
-        console.log($scope.posts);
         $scope.posts.sort((a, b)=>b.ID-a.ID)
+        $scope.posts.forEach(e=>{
+            db.select('allemotes', 'postID', e.ID).then(function(r){
+                e.emotes=[]
+                e.emotes=r.data;
+            })
+        })
+        console.log($scope.posts);
     })
     $scope.Post = function(){
         let data = {
@@ -43,6 +49,8 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
         $scope.icons=res.data
     })
 
+   
+
     $scope.sendemote= function(postid,emojiid){
         let reagaltmar=false
         db.select('reactions','postID',postid).then(function(res){
@@ -58,7 +66,7 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
                     'userID':$rootScope.user.ID,
                     'emojiID':emojiid
                 }
-                db.insert('reactions',data).then(alert('sikeres like'))
+                db.insert('reactions',data).then(alert('Sikeres reagálás'))
             }    
         })
         

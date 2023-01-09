@@ -63,7 +63,15 @@ app.controller('regCtrl', function($scope,$rootScope,db, fileUpload, $location) 
                                 });
                             }
                             else{
-                                db.insert("users",$scope.newuser).then(function(){
+                                let data = {
+                                    name: $scope.newuser.name,
+                                    email: $scope.newuser.email,
+                                    password: CryptoJS.SHA1($scope.newuser.password).toString(),
+                                    filename: res.data.filename
+                                };
+                                if ($scope.newuser.address) data.address = $scope.newuser.address;
+                                if ($scope.newuser.phone) data.phone = $scope.newuser.phone
+                                db.insert("users",data).then(function(){
                                     $scope.error = {
                                         show: true,
                                         type: 'success',
