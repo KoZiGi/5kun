@@ -21,6 +21,11 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
     db.selectAll("postcomments").then(function(res){
         $scope.users=res.data;
         console.log($scope.users);
+        $scope.users.forEach(element =>{
+            if(element.filename==undefined){
+                element.filename="assets/images/nopic.png";
+            }
+        });
     })
     $scope.Post = function(){
         let data = {
@@ -88,6 +93,11 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
         })
         db.selectAll("postcomments").then(function(res){
             $scope.users=res.data;
+            $scope.users.forEach(element =>{
+                if(element.filename==undefined){
+                    element.filename="assets/images/nopic.png";
+                }
+            });
             console.log($scope.users);
         })
     }

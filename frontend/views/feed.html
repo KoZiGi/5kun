@@ -37,8 +37,11 @@
                       <div id="flush-collapse{{post.ID}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordion{{post.ID}}">
                         <div class="accordion-body">
                             <ul>
-                               <li class="comment" ng-repeat="user in users" ng-if="user.postID==post.ID">{{user.username}} : {{user.comment}}</li> 
+                               <li ></li> 
                             </ul>
+                            <div class="comment" ng-repeat="user in users" ng-if="user.postID==post.ID">
+                              <img src="{{user.filename}}" alt=""> {{user.date}} {{user.username}} : {{user.comment}}
+                            </div>
                         </div>
                       </div>
                     </div>
