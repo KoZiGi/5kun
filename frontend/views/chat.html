@@ -1,0 +1,35 @@
+<main class="d-flex" id="chat">
+    <div class="border-end col-lg-4 col-md-6 col-3">
+        <div class="d-flex">
+            <a href="#!/"><div class="w-100 text-center bg-dark text-light fs-2"> <i class="bi bi-arrow-left"></i></div></a>
+            <div class="input-group">
+                <input type="text" class="form-control rounded-0" ng-model="search" placeholder="Search users">
+                <label class="input-group-text rounded-0 bg-dark text-light"><i class="bi bi-search"></i></label>
+            </div>
+        </div>
+        <div class="profiles">
+            <div ng-class="{'bg-info bg-gradient':currentUser==profil.ID}" class="profil d-flex align-items-center justify-content-center justify-content-md-start p-2 border-bottom" ng-if="profil.ID!=user.ID" ng-repeat="profil in profiles | filter:search:strict">
+                <a href="" class="text-decoration-none" ng-click="Chat(profil.ID)">
+                <img ng-if="profil.filename==null" src="./assets/images/nopic.png" class="profilepic2 border border-dark border-3 rounded-circle" alt="">
+                <img ng-if="profil.filename!=null" src="./assets/uploads/{{profil.filename}}" class="profilepic2 border border-dark border-3 rounded-circle">
+                <div class="d-md-block d-none">
+                    <h3 class="fs-4 my-0 text-dark ">{{profil.name}}</h3>
+                    <h4 class="fs-5 my-0 text-muted">{{profil.email}}</h4>
+                </a></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-6 col-9">
+        <div class="bg-dark text-light">
+
+        </div>
+        <div class="dm mx-lg-3">
+            <p ng-repeat="message in messages" ng-class="{'bg-primary messageout text-light text-end':message.fromID==user.ID, 'bg-light messagein':message.fromID!=user.ID}" class="p-2 bg-gradient rounded-pill border border-dark my-3 fw-bold">{{message.message}}</p>
+        </div>
+        <div class="input-group" ng-if="currentUser">
+            <input class="form-control" id="newmsg" type="text">
+            <label class="input-group-text fs-3 bg-primary text-light" ng-click="SendMessage()"><i class="bi bi-send"></i></label>
+        </div>
+
+    </div>
+</main>

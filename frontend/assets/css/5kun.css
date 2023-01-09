@@ -26,12 +26,16 @@ nav, footer{background-color:var(--secondary);}
     flex-flow:column;
     min-height: 100vh;
 }
+#chat{
+    flex: 1 1 auto;
+}
 #profile{
     height: 100%;
 }
 #HeadAction>.btn{
     border-radius: 0 !important;
 }
+.saerch{background-color: var(--primary);}
 .post-header{max-height: 50px;}
 .post-header>img{height: 50px;}
 .border{border-color:var(--primary) !important;}
