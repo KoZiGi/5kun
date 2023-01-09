@@ -32,7 +32,6 @@ app.use(cors());
 //CONTROLLERS
 const userController=require('./controllers/userController.js');
 app.use('/api', userController);
-app.use('/api/files', require('./controllers/files').Router);
-
+app.use('/files', require('./controllers/files').Router);
 
 app.listen(process.env.PORT)

@@ -1,4 +1,4 @@
-app.controller('profilmodCtrl', function($rootScope, $scope, db){
+app.controller('profilmodCtrl', function($rootScope, $scope, db, fileUpload){
     $scope.usermod = {};
     $scope.passmod = {};
     $scope.error = {
@@ -12,16 +12,34 @@ app.controller('profilmodCtrl', function($rootScope, $scope, db){
         type:"danger"
     };
     db.select('users', 'ID', $rootScope.user.ID).then(function(res){
-        console.log(res.data[0])
         $scope.usermod.name = res.data[0].name;
         $scope.usermod.email = res.data[0].email;
         $scope.usermod.phone = res.data[0].phone;
         $scope.usermod.address = res.data[0].address;
     })
     $scope.Mod = function(){
-        db.update('users', $rootScope.user.ID, $scope.usermod).then(function(res){
-            console.log(res);
-        })
+        if ($scope.usermod.pfp!=null && $scope.usermod.pfp!=undefined){
+            fileUpload.uploadFileToUrl($scope.usermod.pfp, 'http://locahost:3000/files').then(function(res){
+                let data = {
+                    name: $scope.usermod.name,
+                    filename: res.data.filename
+                }
+                console.log(data);
+                if ($scope.usermod.phone) data.phone = $scope.usermod.phone;
+                if ($scope.usermod.address) data.address = $scope.usermod.address;
+                db.select('users', 'ID', $rootScope.user.ID).then(function(res){
+                    db.deleteFile(res.data[0].filename).then(function(res){
+                        db.update('users', 'ID', $rootScope.user.ID , data).then(function(res){
+                        })                
+                    })
+                })
+            })
+        }
+        else{
+            db.update('users', 'ID',$rootScope.user.ID, $scope.usermod).then(function(res){
+                console.log(res);
+            })
+        }
     }
     $scope.PassMod = function(){
         let data = {

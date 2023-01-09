@@ -16,17 +16,22 @@ app.run(function($rootScope){
         {
             link:'#!/',
             name:'Login',
-            perm: Object.values($rootScope.user).length==0
+            perm: $rootScope.user.ID==undefined
         },
         {
             link:'#!/reg',
             name:'Registration',
-            perm: Object.values($rootScope.user).length==0
+            perm: $rootScope.user.ID==undefined
         },
         {
             link:'#!/feed',
             name:'Feed',
             perm: Object.values($rootScope.user).length>=0
+        },
+        {
+            link:'#!/profiles',
+            name:'Profiles',
+            perm:Object.values($rootScope.user).length>0
         }
     ]
 })
