@@ -39,3 +39,9 @@ nav, footer{background-color:var(--secondary);}
 .btn:hover{background-color: var(--secondary);}
 .btn:active{background-color: var(--link) !important; border-color: transparent !important;}
 
+.uzenetkuldo{
+    margin: auto;
+    border: black solid 1px;
+    border-radius: 15px;
+    padding: 5px;
+}
