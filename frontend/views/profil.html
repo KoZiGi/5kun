@@ -1,0 +1,29 @@
+<main>
+    <div class="d-flex flex-wrap justify-content-between bg-dark text-light align-items-center" id="HeadAction">
+        <a class="btn rounded-circle" href="#!/feed"><i class="bi bi-arrow-left"></i></a>
+        <span class="fw-bolder fs-4 d-none d-sm-block"><span class="d-sm-inline d-none">Profile -</span> {{profile.name}}</span>
+        <a class="btn rounded-circle" href="#!/profilmod" ng-if="user.email==profile.email"><i class="bi bi-wrench"></i></a>
+        <a class="btn rounded-circle" href="#" ng-if="user.email!=profile.email"><i class="bi bi-three-dots"></i></a>
+    </div>
+    <div class="col-lg-6 col-12 offset-lg-3">
+        <div class="profileheader border-end border-bottom border-start border-dark">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center w-100 pt-3">
+                    <img ng-if="profile.filename==null" class="me-3 mb-3 img img-fluid border border-dark border-4 rounded-circle profilepic2" src="./assets/images/nopic.png" alt="">
+                    <img ng-if="profile.filename!=null" class="me-3 mb-3 img img-fluid border border-dark border-4 rounded-circle profilepic2" src="./assets/uploads/{{profile.filename}}" alt="">
+                    <div>
+                        <h2 class="mb-0">{{profile.name}}<span class="text-muted" ng-if="user.email==profile.email"> (You)</span></h2>
+                        <h5 class="text-muted d-none d-sm-block">{{profile.email}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="posts border-end border-start border-bottom  rounded-bottom border-dark p-3">
+            <h3 class="mb-3">Posts</h3>
+            <div class="post" ng-repeat="post in posts">
+                <div>{{post.date.split('T')[0].replaceAll('-', '.')}} {{post.date.split('T')[1].split('.')[0]}}</div>
+                <div>{{post.postmessage}}</div>
+            </div>
+        </div>
+    </div>
+</main>

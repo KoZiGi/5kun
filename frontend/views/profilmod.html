@@ -1,0 +1,44 @@
+<main>
+    <form class="col-lg-6 col-md-8 col-sm-10 offset-lg-3 offset-md-2 offset-sm-1 border p-3 border rounded border-2 my-3">
+        <h3 class="mb-3 mt-1">Profile modification</h3>
+        <div ng-if="error.show" class="d-flex justify-content-between alert alert-{{error.type}}"><span>{{error.message}}</span><i class="bi bi-x-lg" ng-click="ShutUp()" id="close"></i></div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" ng-model="usermod.name">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail:</label>
+            <input type="email" class="form-control" disabled ng-model="usermod.email">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone:</label>
+            <input type="tel" class="form-control" ng-model="usermod.phone">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address:</label>
+            <input type="text" class="form-control" ng-model="usermod.address">
+        </div>
+        <div class="mb-3">
+            <label for="file" class="form-label">Profile picture:</label>
+            <input type="file" class="form-control" accept="image/*" file-model="usermod.pfp">
+        </div>
+        <input type="button" class="btn" value="Modify" ng-click="Mod()">
+    </form>
+    <form class="col-lg-6 col-md-8 col-sm-10 offset-lg-3 offset-md-2 offset-sm-1 border p-3 border rounded border-2 mb-3">
+        <h3 class="mb-3 mt-1">Password modification</h3>
+        <div ng-if="perror.show" class="d-flex justify-content-between alert alert-{{perror.type}}"><span>{{perror.message}}</span><i class="bi bi-x-lg" ng-click="ShutUp2()" id="close2"></i></div>
+        <div class="mb-3">
+            <label class="form-label">Old password:</label>
+            <input class="form-control" type="password" ng-model="passmod.old">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">New password:</label>
+            <input class="form-control" type="password" ng-model="passmod.new1">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">New password again:</label>
+            <input class="form-control" type="password" ng-model="passmod.new2">
+        </div>
+        <input type="button" value="Modify" class="btn" ng-click="PassMod()">
+    </form>
+</main>

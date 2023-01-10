@@ -1,0 +1,37 @@
+<main>
+    <form class="col-lg-6 col-md-8 col-sm-10 offset-lg-3 offset-md-2 offset-sm-1 border p-3 border rounded border-2">
+        <h3 class="mb-3 mt-1">Register</h3>
+        <div ng-if="error.show" class="d-flex justify-content-between alert alert-{{error.type}}"><span>{{error.message}}</span><i class="bi bi-x-lg" ng-click="ShutUp()" id="close"></i></div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:<span class="star">*</span></label>
+            <input type="text" class="form-control" ng-model="newuser.name">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail:<span class="star">*</span></label>
+            <input type="email" class="form-control" ng-model="newuser.email">
+        </div>
+        <div class="mb-3">
+            <label for="pw1" class="form-label">Password:<span class="star">*</span></label>
+            <input type="password" class="form-control" ng-model="newuser.password">
+        </div>
+        <div class="mb-3">
+            <label for="pw2" class="form-label">Password again:<span class="star">*</span></label>
+            <input type="password" class="form-control" ng-model="pw2">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone:</label>
+            <input type="tel" class="form-control" ng-model="newuser.phone">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address:</label>
+            <input type="text" class="form-control" ng-model="newuser.address">
+        </div>
+        <div class="mb-3">
+            <label for="file" class="form-label">Profile picture:</label>
+            <input type="file" class="form-control" file-model="newuser.pfp">
+        </div>
+        <p class="text-muted"> Fields marked with "<span class="star">*</span>" are required to fill out!</p>
+        <input type="button" class="btn me-2" ng-click="Register()" value="Register"><a href="#!/" class="btn">Login</a>
+    </form>
+
+</main>

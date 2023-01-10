@@ -1,0 +1,55 @@
+.star{
+    color:red;
+}
+:root{
+    --primary: #cb997e;
+    --secondary: #ddbea9;
+    --link: #ffe8d6;
+    --green1:#b7b7a4;
+    --green2: #a5a58d;
+    --green3: #6b705c;
+}
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../fonts/DMSans-Regular.ttf');
+}
+body{font-family:'DM Sans';}
+p, label{font-size:1rem;}
+hr{border-color:var(--primary);}
+h1{font-size:2.25rem;}
+h2{font-size:1.75rem;}
+h3{font-size:1.5rem;}
+nav, footer{background-color:var(--secondary);}
+#close, #close2{cursor:pointer;}
+#body{
+    display: flex;
+    flex-flow:column;
+    min-height: 100vh;
+}
+#profile{
+    height: 100%;
+}
+#HeadAction>.btn{
+    border-radius: 0 !important;
+}
+.post-header{max-height: 50px;}
+.post-header>img{height: 50px;}
+.border{border-color:var(--primary) !important;}
+.border-dark{border-color:var(--bs-dark) !important;}
+.content{flex:1 1 auto;}
+.dropdown-menu{background-color:var(--secondary); border-color:var(--bs-dark);}
+.dropdown-divider{border-color:var(--bs-dark);}
+.dropdown-item{transition: background-color 0.2s;}
+.dropdown-item:hover{background-color:var(--link);}
+.btn{background-color: var(--primary);}
+.btn:hover{background-color: var(--secondary);}
+.btn:active{background-color: var(--link) !important; border-color: transparent !important;}
+
+.uzenetkuldo{
+    margin: auto;
+    border: black solid 1px;
+    border-radius: 15px;
+    padding: 5px;
+}
+.profilepic{width: 50px; height: 50px;}
+.profilepic2{width: 100px;height: 100px;}
