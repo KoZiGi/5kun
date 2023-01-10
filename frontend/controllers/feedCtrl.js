@@ -67,7 +67,13 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
                     'emojiID':emojiid
                 }
                 db.insert('reactions',data).then(alert('Sikeres reagálás'))
-            }    
+            }
+            $scope.posts.forEach(e=>{
+                db.select('allemotes', 'postID', e.ID).then(function(r){
+                    e.emotes=[]
+                    e.emotes=r.data;
+                })
+            })  
         })
         
     }
