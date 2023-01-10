@@ -7,17 +7,28 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
         show: false
     };
     $scope.posts = [];
-    db.selectAll('postView').then(function(res){
-        $scope.posts = res.data;
-        $scope.posts.sort((a, b)=>b.ID-a.ID)
-        $scope.posts.forEach(e=>{
-            db.select('allemotes', 'postID', e.ID).then(function(r){
+    function postthing(){
+        db.selectAll('postView').then(function(res){
+            $scope.posts = res.data;
+            $scope.posts.sort((a, b)=>b.ID-a.ID)
+            $scope.posts.forEach(e=>{
+                e.reacted=false
                 e.emotes=[]
-                e.emotes=r.data;
+                db.select('allemotes', 'postID', e.ID).then(function(r){
+                    e.emotes=r.data;
+                })
+                db.select('reactions','postID',e.ID).then(function(res){
+                    res.data.forEach(element => {
+                        if(element.userID==$rootScope.user.ID){
+                            e.reacted=true
+                        }
+                    })
+                })
             })
+            console.log($scope.posts);
         })
-        console.log($scope.posts);
-    })
+    }
+    postthing()
     $scope.Post = function(){
         let data = {
             userID: $rootScope.user.ID,
@@ -52,31 +63,13 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
    
 
     $scope.sendemote= function(postid,emojiid){
-        let reagaltmar=false
-        db.select('reactions','postID',postid).then(function(res){
-            res.data.forEach(element => {
-                if(element.userID==$rootScope.user.ID){
-                    reagaltmar=true
-                    alert("Erre a postra már reagáltál")
-                }
-            })
-            if(!reagaltmar){
-                let data={
-                    'postID':postid,
-                    'userID':$rootScope.user.ID,
-                    'emojiID':emojiid
-                }
-                db.insert('reactions',data).then(alert('Sikeres reagálás'))
-            }
-            $scope.posts.forEach(e=>{
-                db.select('allemotes', 'postID', e.ID).then(function(r){
-                    e.emotes=[]
-                    e.emotes=r.data;
-                })
-            })  
-        })
-        
+        let data={
+            'postID':postid,
+            'userID':$rootScope.user.ID,
+            'emojiID':emojiid
+        }
+        db.insert('reactions',data).then()
+        postthing()
     }
-    
-    
+  
 })
