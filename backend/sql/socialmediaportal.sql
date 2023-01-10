@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Dec 19. 09:40
+-- Létrehozás ideje: 2023. Jan 10. 12:15
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -23,6 +23,20 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `2123szft_socialmediaportal` DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
 USE `2123szft_socialmediaportal`;
+
+-- --------------------------------------------------------
+
+--
+-- A nézet helyettes szerkezete `allemotes`
+-- (Lásd alább az aktuális nézetet)
+--
+CREATE TABLE `allemotes` (
+`postID` int(11)
+,`emojiID` int(11)
+,`emoticon` varchar(100)
+,`emotename` varchar(30)
+,`count` bigint(21)
+);
 
 -- --------------------------------------------------------
 
@@ -98,6 +112,23 @@ CREATE TABLE `pictures` (
 -- --------------------------------------------------------
 
 --
+-- A nézet helyettes szerkezete `postcomments`
+-- (Lásd alább az aktuális nézetet)
+--
+CREATE TABLE `postcomments` (
+`commentID` int(11)
+,`postID` int(11)
+,`userID` int(11)
+,`date` datetime
+,`comment` text
+,`username` varchar(100)
+,`email` varchar(255)
+,`filename` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `posts`
 --
 
@@ -107,18 +138,6 @@ CREATE TABLE `posts` (
   `date` datetime NOT NULL DEFAULT current_timestamp(),
   `postmessage` text COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
-
---
--- A tábla adatainak kiíratása `posts`
---
-
-INSERT INTO `posts` (`ID`, `userID`, `date`, `postmessage`) VALUES
-(1, 1, '2022-12-19 09:09:09', 'adsf'),
-(2, 1, '2022-12-19 09:09:37', 'Ez egy poszt'),
-(3, 1, '2022-12-19 09:15:52', 'Postz'),
-(4, 1, '2022-12-19 09:16:16', 'poszts'),
-(5, 1, '2022-12-19 09:16:27', 'asdfsadfasdf'),
-(6, 1, '2022-12-19 09:17:01', 'asdfjélasdfjélsda');
 
 -- --------------------------------------------------------
 
@@ -173,7 +192,27 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `name`, `email`, `password`, `phone`, `address`, `filename`, `reg`, `last`, `status`) VALUES
-(1, 'Admin', 'admin@5kun.net', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', '+36301234567', 'Admin utca 52.', NULL, '2022-12-13 11:50:45', NULL, 1);
+(1, 'Admin', 'admin@5kun.net', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', '+36301234567', 'Admin utca 52.', NULL, '2022-12-13 11:50:45', NULL, 1),
+(2, 'dasfafasdasd', 'asd@asd.asd', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', NULL, NULL, NULL, '2023-01-09 09:25:44', NULL, 1),
+(3, 'asdélmasldjv ajs', 'asd@asdasd.asd', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', NULL, NULL, '1673348829494-5KUN.png', '2023-01-10 12:07:09', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Nézet szerkezete `allemotes`
+--
+DROP TABLE IF EXISTS `allemotes`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `allemotes`  AS  select `reactions`.`postID` AS `postID`,`reactions`.`emojiID` AS `emojiID`,`emotions`.`emoticon` AS `emoticon`,`emotions`.`name` AS `emotename`,count(`reactions`.`emojiID`) AS `count` from (`reactions` join `emotions` on(`emotions`.`ID` = `reactions`.`emojiID`)) group by `reactions`.`postID`,`reactions`.`emojiID` ;
+
+-- --------------------------------------------------------
+
+--
+-- Nézet szerkezete `postcomments`
+--
+DROP TABLE IF EXISTS `postcomments`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `postcomments`  AS  select `comments`.`ID` AS `commentID`,`comments`.`postID` AS `postID`,`comments`.`userID` AS `userID`,`comments`.`date` AS `date`,`comments`.`comment` AS `comment`,`users`.`name` AS `username`,`users`.`email` AS `email`,`users`.`filename` AS `filename` from (`comments` join `users` on(`users`.`ID` = `comments`.`userID`)) ;
 
 -- --------------------------------------------------------
 
@@ -247,7 +286,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `emotions`
@@ -271,19 +310,19 @@ ALTER TABLE `pictures`
 -- AUTO_INCREMENT a táblához `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT a táblához `reactions`
 --
 ALTER TABLE `reactions`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Megkötések a kiírt táblákhoz
