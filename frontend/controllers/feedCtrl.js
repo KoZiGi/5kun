@@ -29,6 +29,26 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
         })
     }
     postthing()
+    $scope.comments=[];
+    $scope.users=[];
+    db.selectAll('postView').then(function(res){
+        $scope.posts = res.data;
+        console.log($scope.posts);
+        $scope.posts.sort((a, b)=>b.ID-a.ID)
+    })
+    db.selectAll("comments").then(function(res){
+        $scope.comments=res.data;
+        console.log($scope.comments);
+    })
+    db.selectAll("postcomments").then(function(res){
+        $scope.users=res.data;
+        console.log($scope.users);
+        $scope.users.forEach(element =>{
+            if(element.filename==undefined){
+                element.filename="assets/images/nopic.png";
+            }
+        });
+    })
     $scope.Post = function(){
         let data = {
             userID: $rootScope.user.ID,
@@ -72,4 +92,28 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
         postthing()
     }
   
+
+    $scope.selfComment=function(index, userID,){
+        $scope.comment=document.querySelector(`#ownComment${index}`).value;
+        let data={
+            'userID':$rootScope.user.ID,
+            'postID': index,
+            'comment': $scope.comment
+        }
+        db.insert("comments",data).then(alert('sikeres küldés'))
+        db.selectAll("comments").then(function(res){
+            $scope.comments=res.data;
+            console.log($scope.comments);
+        })
+        db.selectAll("postcomments").then(function(res){
+            $scope.users=res.data;
+            $scope.users.forEach(element =>{
+                if(element.filename==undefined){
+                    element.filename="assets/images/nopic.png";
+                }
+            });
+            console.log($scope.users);
+        })
+    }
+    
 })
