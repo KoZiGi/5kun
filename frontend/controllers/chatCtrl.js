@@ -14,16 +14,19 @@ app.controller('chatCtrl', function($scope, $rootScope, db){
         });
     }
     $scope.SendMessage = function(){
-        let data = {
-            message: document.querySelector('#newmsg').value,
-            fromID: $rootScope.user.ID,
-            toID: $scope.currentUser,
+        if (document.querySelector('#newmsg').value!=""){
+
+            let data = {
+                message: document.querySelector('#newmsg').value,
+                fromID: $rootScope.user.ID,
+                toID: $scope.currentUser,
+            }
+            db.insert('messages', data).then(function(res){
+                if (res.data.insertId>-1){
+                    document.querySelector('#newmsg').value="";
+                    $scope.messages.push(data);
+                } 
+            })
         }
-        db.insert('messages', data).then(function(res){
-            if (res.data.insertId>-1){
-                document.querySelector('#newmsg').value="";
-                $scope.messages.push(data);
-            } 
-        })
     }
 });

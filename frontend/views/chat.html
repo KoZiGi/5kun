@@ -19,16 +19,13 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-8 col-md-6 col-9">
-        <div class="bg-dark text-light">
-
+    <div class="col-lg-8 col-md-6 col-9 d-flex flex-column" id="msgs">
+        <div class="dm">
+            <p ng-repeat="message in messages" ng-class="{'bg-primary messageout text-light text-end':message.fromID==user.ID, 'bg-light messagein':message.fromID!=user.ID}" class="mx-3 p-2 bg-gradient rounded-pill border border-dark my-3 fw-bold">{{message.message}}</p>
         </div>
-        <div class="dm mx-lg-3">
-            <p ng-repeat="message in messages" ng-class="{'bg-primary messageout text-light text-end':message.fromID==user.ID, 'bg-light messagein':message.fromID!=user.ID}" class="p-2 bg-gradient rounded-pill border border-dark my-3 fw-bold">{{message.message}}</p>
-        </div>
-        <div class="input-group" ng-if="currentUser">
-            <input class="form-control" id="newmsg" type="text">
-            <label class="input-group-text fs-3 bg-primary text-light" ng-click="SendMessage()"><i class="bi bi-send"></i></label>
+        <div class="input-group mt-auto sticky-bottom" ng-if="currentUser" id="input">
+            <input class="form-control ms-lg-3" id="newmsg" type="text">
+            <label class="input-group-text fs-5 bg-primary text-light me-lg-3" id="sender" ng-click="SendMessage()"><i class="bi bi-send"></i></label>
         </div>
 
     </div>

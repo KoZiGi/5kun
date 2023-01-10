@@ -26,6 +26,19 @@ nav, footer{background-color:var(--secondary);}
     flex-flow:column;
     min-height: 100vh;
 }
+#newmsg{
+    border-start-start-radius: 50rem;
+    border-end-start-radius: 50rem;
+}
+#sender{
+    border-start-end-radius: 50rem;
+    border-end-end-radius: 50rem;
+}
+/*.dm, #msgs{
+    height: calc(88vh - 1rem - 24px);
+    overflow:auto;
+}*/
+#msgs{flex:1 1 auto;}
 #chat{
     flex: 1 1 auto;
 }
