@@ -23,11 +23,11 @@ function log(req, res) {
 }
 
 //Middlewares
-app.use('/assets',express.static(path.join(__dirname, '/assets')));
-app.use('/views',express.static(path.join(__dirname, '/views')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.use('/assets',express.static(path.join(__dirname, '/assets')));
+app.use('/views',express.static(path.join(__dirname, '/views')));
 
 //CONTROLLERS
 const userController=require('./controllers/userController.js');

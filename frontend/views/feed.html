@@ -20,12 +20,9 @@
                 <p>{{post.postmessage}}</p>
 
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <button class="input-group-text" id="basic-addon1" ng-click="selfComment(post.ID)"><i class="bi bi-send"></i></button>
-                    </div>
+                      <button class="input-group-text bg-primary text-light" id="basic-addon1" ng-click="selfComment(post.ID)"><i class="bi bi-send"></i></button>
                     <input type="text" class="form-control" id="ownComment{{post.ID}}" placeholder="Comment" aria-label="Comment" aria-describedby="basic-addon1">
                   </div>
-
                 <!--comments-->
                 <div class="accordion accordion-flush" id="accordion{{post.ID}}">
                     <div class="accordion-item">

@@ -21,6 +21,7 @@ app.controller('loginCtrl', function($rootScope, $scope, db){
                     email: res.data.email
                 };
                 window.localStorage.setItem('5kun', angular.toJson($rootScope.user));
+                window.location.reload();
             }, function(res){
                 $scope.error.type = res.data.type;
                 $scope.error.message = res.data.message;

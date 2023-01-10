@@ -7,7 +7,7 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
         show: false
     };
     $scope.posts = [];
-    function postthing(){
+    $scope.postthing = function (){
         db.selectAll('postView').then(function(res){
             $scope.posts = res.data;
             $scope.posts.sort((a, b)=>b.ID-a.ID)
@@ -28,7 +28,7 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
             console.log($scope.posts);
         })
     }
-    postthing()
+    $scope.postthing()
     $scope.comments=[];
     $scope.users=[];
     db.selectAll('postView').then(function(res){
@@ -58,9 +58,7 @@ app.controller('feedCtrl', function($rootScope, $scope, db){
             if (res.status==200){
                 if (res.data.insertId){
                     $scope.setMessage('success', 'check-lg', 'Successful post!')
-                    db.selectAll('postView').then(function(res){
-                        $scope.posts = res.data;
-                    })
+                    window.location.reload();
                 }
             }
             else{
