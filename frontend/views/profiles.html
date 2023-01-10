@@ -1,0 +1,19 @@
+<main>
+    <div class="input-group w-75 mx-auto mt-5">
+        <input type="text" class="form-control rounded-0" ng-model="search">
+        <label class="input-group-text rounded-0 saerch"><i class="bi bi-search"></i></label>
+    </div>
+    <div id="profiles">
+        <div class="profil w-75 mx-auto border-bottom border-end border-start my-auto" ng-repeat="profil in profiles | filter:search:strict"><a class="text-decoration-none" href="#!/profil/{{profil.ID}}">
+            <div class="d-flex">
+                <img ng-if="profil.filename==null" class="mx-3 my-2 img img-fluid border border-dark border-4 rounded-circle profilepic2" src="./assets/images/nopic.png" alt="">
+                    <img ng-if="profil.filename!=null" class="mx-3 my-2 img img-fluid border border-dark border-4 rounded-circle profilepic2" src="./assets/uploads/{{profil.filename}}" alt="">
+                <div class="my-auto">
+                    <h4 class="text-black my-0">{{profil.name}}</h4>
+                    <h5 class="text-muted my-0">{{profil.email}}</h5>
+                </div>
+            </div>
+        </a>
+        </div>
+    </div>
+</main>

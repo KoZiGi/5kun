@@ -56,6 +56,10 @@ app.config(function($routeProvider) {
                 if (Object.values($rootScope.user).length>0) $location.path('/feed');
             }}
         })
+        .when('/profiles', {
+            templateUrl: 'views/profiles.html',
+            controller:'profilesCtrl'
+        })
         .when('/feed', {
             templateUrl: 'views/feed.html',
             controller: 'feedCtrl'
@@ -80,6 +84,15 @@ app.config(function($routeProvider) {
         .when("/admin",{
             templateUrl: 'views/admin.html',
             controller: 'adminCtrl'
+        })
+        .when('/chat', {
+            templateUrl:'views/chat.html',
+            controller:'chatCtrl',
+            resolve:{
+                function($rootScope, $location){
+                    if (Object.values($rootScope.user).length==0) $location.path('/');
+                }
+            }
         })
         .otherwise('/')
 });

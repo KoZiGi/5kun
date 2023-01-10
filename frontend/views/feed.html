@@ -49,8 +49,15 @@
 
 
             </div>
-            <div class="emote-picker">
-                <ul class=" d-flex flex-wrap">
+            <div>
+                <div class="reactions">
+                    <ul class=" d-flex flex-wrap" >
+                        <li ng-repeat="emote in post.emotes" class="m-1 mb-3"><i class="bi {{emote.emoticon}}" title="{{emote.emotename}}"></i>:{{emote.count}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div ng-if="post.reacted!=true" class="emote-picker">
+                <ul class=" d-flex flex-wrap" >
                     <li ng-repeat="icon in icons" class="m-1 mb-3"><i class="bi {{icon.emoticon}}" title="{{icon.name}}" ng-click="sendemote(post.ID,icon.ID)"></i></li>
                 </ul>
             </div>
